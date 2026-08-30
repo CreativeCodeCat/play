@@ -264,7 +264,7 @@ function handleIndex (url) {
     placeHolders: playStorePlaceHolders
   }
 
-  return template('https://cvzi.github.io/play/index.html', templateVars)
+  return template('https://CreativeCodeCat.github.io/play/index.html', templateVars)
 }
 
 async function handleRequest (request, env, ctx) {
@@ -272,7 +272,7 @@ async function handleRequest (request, env, ctx) {
   if (url.pathname.startsWith('/play')) {
     return handleBadge(env, ctx, url)
   } else if (url.pathname.startsWith('/favicon')) {
-    return Response.redirect('https://cvzi.github.io/play/favicon.ico', 301)
+    return Response.redirect('https://CreativeCodeCat.github.io/play/favicon.ico', 301)
   } else {
     return handleIndex(url)
   }
