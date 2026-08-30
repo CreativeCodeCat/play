@@ -1,7 +1,7 @@
 /*
-https://github.com/cvzi/play/
+https://github.com/CreativeCodeCat/Play/
 
-Copyright (C) 2022 cuzi
+Copyright (C) 2022 CreativeCodeCat
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@ This is run as a Cloudflare worker
 If a KV storage is bound to the variable PLAY_CACHE, it will be
 used to cache requests to play.google.com.
 
-Example: https://play.cuzi.workers.dev/play?i=org.mozilla.firefox&l=Android&m=$version
-Badge: https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dorg.mozilla.firefox%26l%3DAndroid%26m%3D%24version
+Example: https://play.wayne6324.workers.dev/play?i=org.mozilla.firefox&l=Android&m=$version
+Badge: https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.wayne6324.workers.dev%2Fplay%3Fi%3Dorg.mozilla.firefox%26l%3DAndroid%26m%3D%24version
 
 */
 
