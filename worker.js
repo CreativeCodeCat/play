@@ -60,9 +60,16 @@ const fetchConfig = {
     }
 }
 
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+    'Access-Control-Allow-Headers': '*'
+}
+
 const responseConfigJSON = {
     headers: {
-        'content-type': 'application/json; charset=utf-8'
+        'content-type': 'application/json; charset=utf-8',
+        ...corsHeaders
     }
 }
 
@@ -269,6 +276,9 @@ function handleIndex(url) {
 
 async function handleRequest(request, env, ctx) {
     const url = new URL(request.url)
+    if (request.method === 'OPTIONS') {
+        return new Response(null, { headers: corsHeaders })
+    }
     if (url.pathname.startsWith('/play')) {
         return handleBadge(env, ctx, url)
     } else if (url.pathname.startsWith('/favicon')) {

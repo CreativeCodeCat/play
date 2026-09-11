@@ -12,10 +12,15 @@ function main (ev) {
   if (!document.getElementById('appid')) {
     return
   }
+  applyQueryParams()
   if (!document.getElementById('appid').value) {
     document.getElementById('appid').value = document.getElementById('appid').placeholder.split(' ')[0]
   }
-  document.getElementById('baseurl').value = document.location.origin + document.getElementById('basepath').value
+  // GitHub Pages cannot serve /play JSON. Keep the Cloudflare worker unless this
+  // page is already being served from the worker.
+  if (document.location.hostname.endsWith('.workers.dev')) {
+    document.getElementById('baseurl').value = document.location.origin + document.getElementById('basepath').value
+  }
   document.getElementById('baseurl').addEventListener('change', updateUrls)
   document.getElementById('baseendpoint').addEventListener('change', updateUrls)
   document.getElementById('appid').addEventListener('change', updateUrls)
@@ -39,6 +44,24 @@ function main (ev) {
   })
   updateUrls()
   toggleMobile()
+}
+
+function applyQueryParams () {
+  const params = new URLSearchParams(document.location.search)
+  const setIfPresent = function (id, keys) {
+    for (let i = 0; i < keys.length; i++) {
+      const value = params.get(keys[i])
+      if (value) {
+        document.getElementById(id).value = value
+        return
+      }
+    }
+  }
+  setIfPresent('appid', ['i', 'id'])
+  setIfPresent('gl', ['gl'])
+  setIfPresent('hl', ['hl'])
+  setIfPresent('label', ['l', 'label'])
+  setIfPresent('message', ['m', 'message'])
 }
 
 function composeJsonUrl() {

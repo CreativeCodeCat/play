@@ -51,13 +51,20 @@
                 </tr>
             </thead>
             <tbody>
-                {{items:placeHolders}}
-                <tr>
-                    <td>{{$k}}</td>
-                    <td>=&gt;</td>
-                    <td>{{$v}}</td>
-                </tr>
-                {{end}}
+                <tr><td>$version</td><td>=&gt;</td><td>App version</td></tr>
+                <tr><td>$installs</td><td>=&gt;</td><td>Installs</td></tr>
+                <tr><td>$totalinstalls</td><td>=&gt;</td><td>Precise installs</td></tr>
+                <tr><td>$shortinstalls</td><td>=&gt;</td><td>Shorter installs</td></tr>
+                <tr><td>$updated</td><td>=&gt;</td><td>Last update</td></tr>
+                <tr><td>$android</td><td>=&gt;</td><td>Required min. Android version</td></tr>
+                <tr><td>$targetandroid</td><td>=&gt;</td><td>Target Android version</td></tr>
+                <tr><td>$minsdk</td><td>=&gt;</td><td>Required min. SDK</td></tr>
+                <tr><td>$targetsdk</td><td>=&gt;</td><td>Target SDK</td></tr>
+                <tr><td>$rating</td><td>=&gt;</td><td>Rating</td></tr>
+                <tr><td>$floatrating</td><td>=&gt;</td><td>Precise rating</td></tr>
+                <tr><td>$name</td><td>=&gt;</td><td>Name</td></tr>
+                <tr><td>$friendly</td><td>=&gt;</td><td>Content Rating</td></tr>
+                <tr><td>$published</td><td>=&gt;</td><td>First published</td></tr>
             </tbody>
         </table>
 
@@ -79,7 +86,7 @@
                         <label for="appid">App id:</label>
                     </td>
                     <td>
-                        <input type="text" size="60" name="appid" id="appid" value="{{appid}}"
+                        <input type="text" size="60" name="appid" id="appid" value="org.mozilla.firefox"
                             placeholder="org.mozilla.firefox or https://play.google.com/store/apps/details?id=...">
                     </td>
                 </tr>
@@ -88,7 +95,7 @@
                         <label for="gl">Play Store country:</label>
                     </td>
                     <td>
-                        <input type="text" size="60" name="gl" id="gl" value="{{playStoreCountry}}"
+                        <input type="text" size="60" name="gl" id="gl" value="US"
                             placeholder="US, ES...">
                         <br class="mobile">
                         Use any country code available at <br class="mobile"><a
@@ -101,7 +108,7 @@
                         <label for="hl">Display language:</label>
                     </td>
                     <td>
-                        <input type="text" size="60" name="hl" id="hl" value="{{displayLanguage}}"
+                        <input type="text" size="60" name="hl" id="hl" value="en"
                             placeholder="en, es...">
                         <br class="mobile">
                         Use any language code available at <br class="mobile"><a
@@ -114,13 +121,22 @@
                         <label for="label">Label:</label>
                     </td>
                     <td>
-                        <input type="text" size="60" name="label" id="label" value="{{label}}">
+                        <input type="text" size="60" name="label" id="label" value="Android">
                         <br class="mobile">
-                        {{items:placeHolders}}
-                        <span class="addplaceholder"
-                            onclick="this.parentNode.querySelector('input').value += this.textContent"
-                            title="{{$v}}">{{$k}}</span>
-                        {{end}}
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="App version">$version</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Installs">$installs</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Precise installs">$totalinstalls</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Shorter installs">$shortinstalls</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Last update">$updated</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Required min. Android version">$android</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Target Android version">$targetandroid</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Required min. SDK">$minsdk</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Target SDK">$targetsdk</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Rating">$rating</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Precise rating">$floatrating</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Name">$name</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Content Rating">$friendly</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="First published">$published</span>
                     </td>
                 </tr>
                 <tr>
@@ -128,13 +144,22 @@
                         <label for="message">Message:</label>
                     </td>
                     <td>
-                        <input type="text" size="60" name="message" id="message" value="{{message}}">
+                        <input type="text" size="60" name="message" id="message" value="$version">
                         <br class="mobile">
-                        {{items:placeHolders}}
-                        <span class="addplaceholder"
-                            onclick="this.parentNode.querySelector('input').value += this.textContent"
-                            title="{{$v}}">{{$k}}</span>
-                        {{end}}
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="App version">$version</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Installs">$installs</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Precise installs">$totalinstalls</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Shorter installs">$shortinstalls</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Last update">$updated</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Required min. Android version">$android</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Target Android version">$targetandroid</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Required min. SDK">$minsdk</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Target SDK">$targetsdk</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Rating">$rating</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Precise rating">$floatrating</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Name">$name</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="Content Rating">$friendly</span>
+                        <span class="addplaceholder" onclick="this.parentNode.querySelector('input').value += this.textContent" title="First published">$published</span>
                     </td>
                 </tr>
                 <tr>
