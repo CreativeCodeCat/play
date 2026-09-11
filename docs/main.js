@@ -5,8 +5,12 @@ if (document.readyState === 'loading') {
 }
 
 function main (ev) {
+  initTheme()
   if (document.location.protocol !== 'https:' && document.location.hostname.indexOf('heroku') !== -1) {
     document.location.protocol = 'https:'
+  }
+  if (!document.getElementById('appid')) {
+    return
   }
   if (!document.getElementById('appid').value) {
     document.getElementById('appid').value = document.getElementById('appid').placeholder.split(' ')[0]
@@ -31,7 +35,7 @@ function main (ev) {
   document.getElementById('copymenu').addEventListener('click', ev => ev.stopPropagation())
   document.body.addEventListener('click', function() {
     const m = document.getElementById('copymenu')
-    if(m) m.style.display = 'none'
+    if (m) m.hidden = true
   })
   updateUrls()
   toggleMobile()
@@ -119,8 +123,43 @@ function copyMenu (ev) {
     }
   }
   div.dataset.textareaid = this.parentNode.querySelector('textarea').id
-  div.style.display = 'block'
+  div.hidden = false
   this.parentNode.appendChild(div)
+}
+
+function initTheme () {
+  const btn = document.getElementById('theme-toggle')
+  if (!btn) return
+
+  const mq = window.matchMedia('(prefers-color-scheme: dark)')
+
+  const currentTheme = function () {
+    return document.documentElement.dataset.theme || (mq.matches ? 'dark' : 'light')
+  }
+
+  const syncButton = function () {
+    const dark = currentTheme() === 'dark'
+    btn.setAttribute('aria-pressed', dark ? 'true' : 'false')
+    btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode')
+    btn.title = dark ? 'Light mode' : 'Dark mode'
+  }
+
+  btn.addEventListener('click', function () {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark'
+    document.documentElement.dataset.theme = next
+    try {
+      localStorage.setItem('theme', next)
+    } catch (e) { }
+    syncButton()
+  })
+
+  if (typeof mq.addEventListener === 'function') {
+    mq.addEventListener('change', function () {
+      if (!localStorage.getItem('theme')) syncButton()
+    })
+  }
+
+  syncButton()
 }
 
 function toggleMobile () {

@@ -2,25 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>shields json for google play store app badge</title>
-    <meta name="description"
-        content="shields.io badges for Android apps on Google Play Store using the endpoint badge" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Shields JSON for Google Play Store app badges</title>
+    <meta name="description" content="shields.io badges for Android apps on Google Play Store using the endpoint badge">
     <meta name="keywords" content="shields,badge,android,google,play,store">
-    <link rel="stylesheet" type="text/css" href="https://CreativeCodeCat.github.io/play/main.css" />
-    <link rel="icon" type="image/x-icon" href="https://CreativeCodeCat.github.io/play/favicon.ico">
-    <script src="https://CreativeCodeCat.github.io/play/main.js"></script>
-    <meta name="google-site-verification" content="tnVo2nRPkj_OdF4iovioWfXkqYcRsXUcIvOtdO37eLw" />
-    <meta name="msvalidate.01" content="6E31434439F9C46EF683442C564E819F" />
-    <meta name="yandex-verification" content="fcbb4b085cc70ff8" />
+    <link rel="stylesheet" href="main.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="google-site-verification" content="tnVo2nRPkj_OdF4iovioWfXkqYcRsXUcIvOtdO37eLw">
+    <meta name="msvalidate.01" content="6E31434439F9C46EF683442C564E819F">
+    <meta name="yandex-verification" content="fcbb4b085cc70ff8">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme')
+                if (theme === 'light' || theme === 'dark') {
+                    document.documentElement.dataset.theme = theme
+                }
+            } catch (e) { }
+        })()
+    </script>
+    <script src="main.js" defer></script>
 </head>
 
 <body>
-    <h1>shields json for google play store app badge</h1>
-    <div>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-        <table>
+    <header class="site-header">
+        <h1>Shields JSON for Google Play Store app badges</h1>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">
+            <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main id="main">
+        <table class="placeholders">
             <thead>
                 <tr>
                     <th></th>
@@ -31,18 +54,18 @@
                 {{items:placeHolders}}
                 <tr>
                     <td>{{$k}}</td>
-                    <td>=></td>
+                    <td>=&gt;</td>
                     <td>{{$v}}</td>
                 </tr>
                 {{end}}
             </tbody>
         </table>
-        <br>
+
         <table class="controls">
             <tbody>
                 <tr>
                     <td>
-                        <label for="label">Base URL:</label>
+                        <label for="baseurl">Base URL:</label>
                     </td>
                     <td>
                         <input type="text" size="40" id="baseurl" disabled
@@ -53,7 +76,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="label">App id:</label>
+                        <label for="appid">App id:</label>
                     </td>
                     <td>
                         <input type="text" size="60" name="appid" id="appid" value="{{appid}}"
@@ -62,28 +85,28 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="label">Play Store country:</label>
+                        <label for="gl">Play Store country:</label>
                     </td>
                     <td>
                         <input type="text" size="60" name="gl" id="gl" value="{{playStoreCountry}}"
                             placeholder="US, ES...">
-                        <br class="mobile" />
-                        Use any country code available at <br class="mobile" /><a
+                        <br class="mobile">
+                        Use any country code available at <br class="mobile"><a
                             href="https://developers.google.com/custom-search/docs/xml_results_appendices#countryCodes"
-                            target="_blank">https://developers.google.com/custom-search/docs/xml_results_appendices#countryCodes</a>
+                            target="_blank" rel="noopener noreferrer">Google country codes</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="label">Display language:</label>
+                        <label for="hl">Display language:</label>
                     </td>
                     <td>
                         <input type="text" size="60" name="hl" id="hl" value="{{displayLanguage}}"
                             placeholder="en, es...">
-                        <br class="mobile" />
-                        Use any language code available at <br class="mobile" /><a
+                        <br class="mobile">
+                        Use any language code available at <br class="mobile"><a
                             href="https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages"
-                            target="_blank">https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages</a>
+                            target="_blank" rel="noopener noreferrer">Google interface languages</a>
                     </td>
                 </tr>
                 <tr>
@@ -92,7 +115,7 @@
                     </td>
                     <td>
                         <input type="text" size="60" name="label" id="label" value="{{label}}">
-                        <br class="mobile" />
+                        <br class="mobile">
                         {{items:placeHolders}}
                         <span class="addplaceholder"
                             onclick="this.parentNode.querySelector('input').value += this.textContent"
@@ -105,8 +128,8 @@
                         <label for="message">Message:</label>
                     </td>
                     <td>
-                        <input type="text" size="60" name="message" id="message" value="{{message }}">
-                        <br class="mobile" />
+                        <input type="text" size="60" name="message" id="message" value="{{message}}">
+                        <br class="mobile">
                         {{items:placeHolders}}
                         <span class="addplaceholder"
                             onclick="this.parentNode.querySelector('input').value += this.textContent"
@@ -115,82 +138,81 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><button id="go">Go</button></td>
+                    <td colspan="2"><button type="button" id="go">Go</button></td>
                 </tr>
                 <tr>
-                    <td>URL:</td>
+                    <td><label for="jsonurl">URL:</label></td>
                     <td>
                         <input type="text" size="60" data-desktop-size="100" data-mobile-size="60" id="jsonurl">
-                        <br class="mobile" />
-                        Copy this into the form at <br class="mobile" /><a href="https://shields.io/endpoint"
-                            target="_blank">https://shields.io/endpoint</a> to customize color/logo
+                        <br class="mobile">
+                        Copy this into the form at <br class="mobile"><a href="https://shields.io/endpoint"
+                            target="_blank" rel="noopener noreferrer">shields.io/endpoint</a> to customize color/logo
                     </td>
                 </tr>
-                <tr style="color:silver" class="desktop">
+                <tr class="desktop json-preview">
                     <td>JSON:</td>
                     <td>
                         <pre id="json"></pre>
                     </td>
                 </tr>
                 <tr>
-                    <td>Badge URL:</td>
-                    <td><textarea id="shieldurl"></textarea><br><span class="copy">Copy<span
-                                class="status"></span></span></td>
+                    <td><label for="shieldurl">Badge URL:</label></td>
+                    <td>
+                        <textarea id="shieldurl" readonly></textarea>
+                        <br>
+                        <button type="button" class="copy">Copy<span class="status"></span></button>
+                    </td>
                 </tr>
                 <tr>
                     <td>Badge:</td>
-                    <td><img id="shield"
+                    <td>
+                        <img id="shield"
                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                            alt="Badge preview"></td>
+                            alt="Badge preview">
+                    </td>
                 </tr>
                 <tr>
-                    <td>Customized Badge URL:</td>
-                    <td><textarea id="shieldurlstyled"></textarea><br><span class="copy">Copy<span
-                                class="status"></span></span></td>
+                    <td><label for="shieldurlstyled">Customized Badge URL:</label></td>
+                    <td>
+                        <textarea id="shieldurlstyled" readonly></textarea>
+                        <br>
+                        <button type="button" class="copy">Copy<span class="status"></span></button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Customized Badge :</td>
-                    <td><img id="shieldstyled"
+                    <td>Customized Badge:</td>
+                    <td>
+                        <img id="shieldstyled"
                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                            alt="Customized badge preview"></td>
+                            alt="Customized badge preview">
+                    </td>
                 </tr>
-
             </tbody>
         </table>
+    </main>
 
+    <div id="copymenu" hidden>
+        <ul></ul>
     </div>
 
-    <div id="copymenu" style="display:none">
-        <ul>
-        </ul>
-    </div>
+    <footer class="site-footer">
+        Source code at <a href="https://github.com/CreativeCodeCat/Play">GitHub</a>
+        ·
+        <a href="privacy.html">Privacy policy</a>
+    </footer>
 
-    <br>
-    <br>
-    <hr>
-    Source code at <a href="https://github.com/CreativeCodeCat/Play">github</a>
-    <br>
-    <br>
-    <a href="https://CreativeCodeCat.github.io/play/privacy.html">Privacy policy</a>
-
-    <div>
-        <!-- https://github.com/tholman/github-corners -->
-        <a href="https://github.com/CreativeCodeCat/Play" class="github-corner" aria-label="View source on GitHub"
-            title="View source on GitHub">
-            <svg width="80" height="80" viewBox="0 0 250 250"
-                style="fill:#97ca00; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
-                <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-                <path
-                    d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-                    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-                <path
-                    d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-                    fill="currentColor" class="octo-body"></path>
-            </svg>
-        </a>
-    </div>
-
-
+    <a href="https://github.com/CreativeCodeCat/Play" class="github-corner" aria-label="View source on GitHub"
+        title="View source on GitHub">
+        <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" class="octo-arm"></path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
 </body>
 
 </html>

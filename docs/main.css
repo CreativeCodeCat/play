@@ -3,54 +3,388 @@
   font-family: 'Lekton';
   font-style: normal;
   font-weight: 400;
-  src: local('Lekton'), local('Lekton-Regular'), url(https://CreativeCodeCat.github.io/play/Lekton/Lekton.woff2) format('woff2'), url(https://CreativeCodeCat.github.io/play/Lekton/Lekton.ttf) format('truetype');
+  src: local('Lekton'), local('Lekton-Regular'), url(Lekton/Lekton.woff2) format('woff2'), url(Lekton/Lekton.ttf) format('truetype');
+}
+
+:root {
+  color-scheme: light dark;
+  --bg: #faf7f6;
+  --text: #553344;
+  --muted: #8a7480;
+  --link: #3d6b00;
+  --link-hover: #2a4d00;
+  --border: #d9c8ce;
+  --surface: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #c4adb6;
+  --button-bg: #97ca00;
+  --button-text: #1a2200;
+  --menu-bg: #f0f0f0;
+  --menu-hover: #c8c8c8;
+  --menu-shadow: #aaaaaa;
+  --copy-status: #2a7a2a;
+  --github-fill: #97ca00;
+  --github-color: #ffffff;
+  --focus: #3d6b00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #161214;
+    --text: #eadde2;
+    --muted: #b5a0a8;
+    --link: #b6e04a;
+    --link-hover: #d4f07a;
+    --border: #3d3236;
+    --surface: #221c1f;
+    --input-bg: #1c1719;
+    --input-border: #5a474e;
+    --button-bg: #97ca00;
+    --button-text: #1a2200;
+    --menu-bg: #2a2326;
+    --menu-hover: #4a3d42;
+    --menu-shadow: #000000;
+    --copy-status: #8fd48f;
+    --github-fill: #97ca00;
+    --github-color: #161214;
+    --focus: #b6e04a;
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #161214;
+  --text: #eadde2;
+  --muted: #b5a0a8;
+  --link: #b6e04a;
+  --link-hover: #d4f07a;
+  --border: #3d3236;
+  --surface: #221c1f;
+  --input-bg: #1c1719;
+  --input-border: #5a474e;
+  --button-bg: #97ca00;
+  --button-text: #1a2200;
+  --menu-bg: #2a2326;
+  --menu-hover: #4a3d42;
+  --menu-shadow: #000000;
+  --copy-status: #8fd48f;
+  --github-fill: #97ca00;
+  --github-color: #161214;
+  --focus: #b6e04a;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
 }
 
 body {
-  font-family:'Lekton', sans-serif;
-  color:#553344;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  max-width: 56rem;
+  font-family: 'Lekton', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.45;
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+}
+
+.site-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-right: 4rem;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.theme-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+    display: block;
+  }
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+.privacy h2 {
+  margin: 1.75rem 0 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.privacy p,
+.privacy ul {
+  max-width: 42rem;
+}
+
+.privacy ul {
+  padding-left: 1.25rem;
+}
+
+.privacy li {
+  margin: 0.25rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.placeholders,
+.controls {
+  margin-bottom: 1.75rem;
+}
+
+.placeholders th,
+.placeholders td,
+.controls td {
+  padding: 0.35rem 0.5rem 0.35rem 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.controls td:first-child {
+  white-space: nowrap;
+  padding-right: 1rem;
+}
+
+input[type="text"],
+textarea,
+pre {
+  font: inherit;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 0.25rem;
+  padding: 0.35rem 0.5rem;
+}
+
+input[type="text"] {
+  max-width: 100%;
+}
+
+input:disabled {
+  opacity: 0.75;
+}
+
+textarea {
+  width: 60%;
+  min-height: 4.5rem;
+  resize: vertical;
+}
+
+pre {
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#go {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 0.4rem 1.1rem;
 }
 
 .addplaceholder {
-  cursor:pointer;
-  color:silver
-}
-.addplaceholder:hover {
-  color:black;
-}
-.copy {
-  cursor:copy;
-  color:silver
-}
-.copy:hover {
-  color:black;
-}
-.copy .status {
-  color:green
-}
-#shieldurl,#shieldurlstyled{
-  width:60%
-}
-#copymenu {
-  position:absolute;
-  background:#f0f0f0;
-  box-shadow: 2px 2px 2px #aaa;
-  border:1px solid gray;
-  border-radius:0.2em
-}
-#copymenu ul {
-  list-style:none;
-  margin:0;
-  padding:0;
-}
-#copymenu ul li {
-  cursor:copy;
-  border-radius:0.2em;
-  padding:0px 5px; 
-}
-#copymenu ul li:hover {
-  background:#aaa;
+  cursor: pointer;
+  color: var(--muted);
+  margin-right: 0.4rem;
 }
 
-/* https://github.com/tholman/github-corners */
-.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+.addplaceholder:hover {
+  color: var(--text);
+}
+
+.copy {
+  cursor: copy;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.copy:hover {
+  color: var(--text);
+}
+
+.copy .status {
+  color: var(--copy-status);
+}
+
+#shieldurl,
+#shieldurlstyled {
+  width: 60%;
+}
+
+#copymenu {
+  position: absolute;
+  background: var(--menu-bg);
+  box-shadow: 2px 2px 2px var(--menu-shadow);
+  border: 1px solid var(--border);
+  border-radius: 0.2em;
+}
+
+#copymenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#copymenu ul li {
+  cursor: copy;
+  border-radius: 0.2em;
+  padding: 0.2rem 0.5rem;
+}
+
+#copymenu ul li:hover {
+  background: var(--menu-hover);
+}
+
+.site-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.json-preview {
+  color: var(--muted);
+}
+
+.github-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--github-color);
+}
+
+.github-corner svg {
+  fill: var(--github-fill);
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+
+  .site-header {
+    padding-right: 3.5rem;
+  }
+
+  textarea,
+  #shieldurl,
+  #shieldurlstyled {
+    width: 100%;
+  }
+}
