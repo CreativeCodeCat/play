@@ -337,6 +337,20 @@ button {
   color: var(--muted);
 }
 
+.json-frame {
+  display: block;
+  width: 100%;
+  min-height: 8rem;
+  border: 1px solid var(--input-border);
+  border-radius: 0.25rem;
+  background: var(--input-bg);
+}
+
+.json-frame[hidden],
+#json[hidden] {
+  display: none;
+}
+
 .github-corner {
   position: absolute;
   top: 0;

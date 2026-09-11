@@ -93,10 +93,26 @@ function updateUrls () {
 
   const updateDelayed = function() {
     updateImages()
-    fetch(jsonurl).then(response => response.text()).then(function(text) {
-      document.getElementById('json').innerHTML = text
-    }).catch(function(e) {
-      document.getElementById('json').innerHTML = 'Could not load JSON:\n' + e
+    const jsonEl = document.getElementById('json')
+    const frame = document.getElementById('jsonframe')
+    fetch(jsonurl).then(function (response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status)
+      return response.text()
+    }).then(function (text) {
+      jsonEl.hidden = false
+      if (frame) {
+        frame.hidden = true
+        frame.removeAttribute('src')
+      }
+      jsonEl.textContent = text
+    }).catch(function () {
+      // GitHub Pages cannot read the worker JSON until CORS is deployed.
+      // Showing the endpoint in an iframe still works without CORS.
+      jsonEl.hidden = true
+      if (frame) {
+        frame.hidden = false
+        frame.src = jsonurl
+      }
     })
   }
   lastTimeout = window.setTimeout(updateDelayed, 1000)

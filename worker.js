@@ -215,25 +215,39 @@ async function getPlayStore(packageName, env, ctx, hl, gl) {
     return result
 }
 
-function errorJSON(message) {
-    return new Response(JSON.stringify({
+function badgeJSON(payload, url) {
+    const json = JSON.stringify(payload)
+    const callback = url && url.searchParams.get('callback')
+    if (callback && /^[A-Za-z_$][\w.$]*$/.test(callback)) {
+        return new Response(callback + '(' + json + ')', {
+            headers: {
+                'content-type': 'text/javascript; charset=utf-8',
+                ...corsHeaders
+            }
+        })
+    }
+    return new Response(json, responseConfigJSON)
+}
+
+function errorJSON(message, url) {
+    return badgeJSON({
         schemaVersion: 1,
         label: 'error',
         message: '' + message,
         isError: true
-    }), responseConfigJSON)
+    }, url)
 }
 
 async function handleBadge(env, ctx, url) {
     const appId = url.searchParams.get('i') || url.searchParams.get('id') || ''
 
     if (!appId) {
-        return errorJSON('missing app id')
+        return errorJSON('missing app id', url)
     }
 
     const m = appId.match(appIDPattern)
     if (!m || !m[0]) {
-        return errorJSON('invalid app id format')
+        return errorJSON('invalid app id format', url)
     }
 
     const hl = url.searchParams.get('hl')
@@ -244,7 +258,7 @@ async function handleBadge(env, ctx, url) {
         playData = await getPlayStore(m[0], env, ctx, hl, gl)
     } catch (e) {
         console.error(e)
-        return errorJSON(e)
+        return errorJSON(e, url)
     }
 
     let label = url.searchParams.get('l') || url.searchParams.get('label') || 'play'
@@ -253,12 +267,12 @@ async function handleBadge(env, ctx, url) {
     label = replacePlaceHolders(label.substring(0, 1000), playData)
     message = replacePlaceHolders(message.substring(0, 1000), playData)
 
-    return new Response(JSON.stringify({
+    return badgeJSON({
         schemaVersion: 1,
         label,
         message,
         cacheSeconds: 3600
-    }), responseConfigJSON)
+    }, url)
 }
 
 function handleIndex(url) {
